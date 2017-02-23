@@ -14,6 +14,9 @@
                  (buffer-string)))))))
 
 
+;;(server-start)
+;;(setq server-socket-dir "~/.emacs.d/server")
+
 (require 'package)
 ;;(add-to-list 'package-archives
 ;;             '("melpa" . "https://melpa.org/packages/") t)
@@ -35,6 +38,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (require 'highlight-80+)
+
 (require 'ox-md)
 (require 'ox-gfm)
 
@@ -126,7 +130,7 @@
  '(org-agenda-todo-ignore-with-date t)
  '(org-agenda-window-setup (quote other-window))
  '(org-deadline-warning-days 7)
- '(org-export-html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\">")
+ ;;'(org-export-html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\">")
  '(org-fast-tag-selection-single-key nil)
  '(org-log-done (quote (done)))
  '(org-refile-targets (quote (("newgtd.org" :maxlevel . 1) ("someday.org" :level . 2))))
@@ -192,31 +196,12 @@
 ;; publish
 (require 'org-publish)
 (setq org-publish-project-alist
-      '(("org-notes"
-         :base-directory "~/org/"
+      '(("org-todo"
+         :base-directory "~/org/todos/"
          :base-extension "org"
-         :publishing-directory "/home/jliu/public_html/"
+         :publishing-directory "~/public_html/todos/"
          :recursive t
          :publishing-function org-html-publish-to-html
-         :headline-levels 4             ; Just the default for this project.
-         :auto-preamble t
-         :style-include-default nil
-         :export-creator-info nil    ; Disable the inclusion of "Created by Org" in the postamble.
-         :export-author-info nil     ; Disable the inclusion of "Author: Your Name" in the postamble.
-        )
-        ("org-static"
-         :base-directory "~/org/"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "/home/jliu/public_html/"
-         :recursive t
-         :publishing-function org-publish-attachment
-        )
-        ("org-todo"
-         :base-directory "~/org/calenda/"
-         :base-extension "org"
-         :publishing-directory "/home/jliu/public_html/todo/"
-         :recursive t
-         :publishing-function org-publish-org-to-html
          :headline-levels 4             ; Just the default for this project.
          :auto-preamble t
          :style-include-default nil
@@ -226,16 +211,18 @@
         ("org-notes"
          :base-directory "~/org/notes/"
          :base-extension "org"
-         :publishing-directory "/home/jliu/public_html/notes/"
+         :publishing-directory "~/public_html/notes/"
          :recursive t
-         :publishing-function org-publish-org-to-html
+         :publishing-function org-html-publish-to-html
          :headline-levels 4             ; Just the default for this project.
          :auto-preamble t
          :style-include-default nil
          :export-creator-info nil    ; Disable the inclusion of "Created by Org" in the postamble.
          :export-author-info nil     ; Disable the inclusion of "Author: Your Name" in the postamble.
+         :makeindex t
         )
-        ("org" :components ("org-notes" "org-static" "org-todo" "org-done" "org-notes"))
+        ("org"
+         :components ("org-notes" "org-todo"))
        )
       )
 

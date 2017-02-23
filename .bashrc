@@ -12,6 +12,9 @@ startp4d='p4d -d -r /home/jliu/Development/p4d'
 export PYTHONDONTWRITEBYTECODE=1
 
 alias xclip='xclip -selection clipboard'
+alias disas='objdump -drwC -Mintel'
+
+alias g11='g++ -std=c++11'
 
 #export PATH=$HOME/Tools/terraform:$PATH
 # add intellij
@@ -128,3 +131,7 @@ function setp4config {
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/jliu/.sdkman"
 [[ -s "/home/jliu/.sdkman/bin/sdkman-init.sh" ]] && source "/home/jliu/.sdkman/bin/sdkman-init.sh"
+
+export GOBIN="$HOME/Development/goprojects/bin"
+export GOPATH="$HOME/Development/goprojects/src"
+export PATH=$PATH:$HOME/Development/goprojects/bin
